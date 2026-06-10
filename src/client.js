@@ -1,3 +1,5 @@
+// @ts-check
+
 /**
  * Adds the appropriate slot attribute to each top-level node in the given HTML
  * string.
@@ -6,11 +8,11 @@
  * addSlotAttrsToHtmlString('foo', '<div>bar</div><div>baz</div>');
  * // '<div slot="foo">bar</div><div slot="foo">baz</div>'
  *
- * @param slotName Name of slot to apply to HTML string.
- * @param html Stringified HTML that should be projected into the given slotname.
+ * @param {string} slotName Name of slot to apply to HTML string.
+ * @param {string} html Stringified HTML that should be projected into the given slotname.
  * @returns A stringified HTML string with the slot attribute applied to each top-level node.
  */
-const addSlotAttrsToHtmlString = (slotName: string, html: string) => {
+function addSlotAttrsToHtmlString (slotName, html) {
 	const templ = document.createElement('template');
 	templ.innerHTML = html;
 	Array.from(templ.content.children).forEach((node) => {
@@ -19,11 +21,17 @@ const addSlotAttrsToHtmlString = (slotName: string, html: string) => {
 	return templ.innerHTML;
 };
 
-export default (element: HTMLElement) =>
+/** @param {HTMLElement} element */
+export default (element) =>
+	/**
+	 * @param {any} Component
+   * @param {Record<string, any>} props
+   * @param {{default: string, [slotName: string]: string}} slots
+	 */
 	async (
-		Component: any,
-		props: Record<string, any>,
-		{ default: defaultChildren, ...slotted }: { default: string; [slotName: string]: string },
+		Component,
+		props,
+		{ default: defaultChildren, ...slotted },
 	) => {
 		// Get the LitElement element instance.
 		let component = element.children[0];
@@ -63,7 +71,7 @@ export default (element: HTMLElement) =>
 		for (let [name, value] of Object.entries(props)) {
 			// Check if reactive property or class property.
 			if (name in Component.prototype) {
-				(component as any)[name] = value;
+				/** @type {any} */(component)[name] = value;
 			}
 		}
 
