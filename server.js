@@ -65,6 +65,8 @@ function* render(Component, attrs, slots) {
 		elementRenderers: [LitElementRenderer],
 		customElementInstanceStack: [instance],
 		customElementHostStack: [instance],
+		eventTargetStack: [],
+		slotStack: [],
 		deferHydration: false,
 	});
 	if (shadowContents !== undefined) {
@@ -112,7 +114,7 @@ async function renderToStaticMarkup(Component, props, slots) {
 }
 
 export default {
-	name: '@astrojs/lit',
+	name: 'astro-lit',
 	check,
 	renderToStaticMarkup,
 };

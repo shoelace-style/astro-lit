@@ -5,13 +5,13 @@ function getViteConfiguration() {
 	return {
 		optimizeDeps: {
 			include: [
-				'@astrojs/lit/dist/client.js',
-				'@astrojs/lit/client-shim.js',
-				'@astrojs/lit/hydration-support.js',
+				'astro-lit/src/client.js',
+				'astro-lit/client-shim.js',
+				'astro-lit/hydration-support.js',
 				'@webcomponents/template-shadowroot/template-shadowroot.js',
 				'@lit-labs/ssr-client/lit-element-hydrate-support.js',
 			],
-			exclude: ['@astrojs/lit/server.js'],
+			exclude: ['astro-lit/server.js'],
 		},
 		ssr: {
 			external: ['lit-element', '@lit-labs/ssr', '@astrojs/lit', 'lit/decorators.js'],
@@ -24,8 +24,8 @@ function getViteConfiguration() {
  */
 export function getContainerRenderer() {
 	return {
-		name: '@astrojs/lit',
-		serverEntrypoint: '@astrojs/lit/server.js',
+		name: 'astro-lit',
+		serverEntrypoint: 'astro-lit',
 	};
 }
 
@@ -35,7 +35,7 @@ export function getContainerRenderer() {
  */
 export default function () {
 	return {
-		name: '@astrojs/lit',
+		name: 'astro-lit',
 		hooks: {
 			'astro:config:setup': ({ updateConfig, addRenderer, injectScript }) => {
 				// Inject the necessary polyfills on every page (inlined for speed).
@@ -47,9 +47,9 @@ export default function () {
 				injectScript('before-hydration', `import '@astrojs/lit/hydration-support.js';`);
 				// Add the lit renderer so that Astro can understand lit components.
 				addRenderer({
-					name: '@astrojs/lit',
-					serverEntrypoint: '@astrojs/lit/server.js',
-					clientEntrypoint: '@astrojs/lit/dist/client.js',
+					name: 'astro-lit',
+					serverEntrypoint: 'astro-lit/server.js',
+					clientEntrypoint: 'astro-lit/src/client.js',
 				});
 				// Update the vite configuration.
 				updateConfig({

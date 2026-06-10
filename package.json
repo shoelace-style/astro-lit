@@ -1,9 +1,9 @@
 {
-  "name": "@astrojs/lit",
+  "name": "astro-lit",
   "version": "4.3.0",
   "description": "Use Lit components within Astro",
   "type": "module",
-  "types": "./dist/index.d.ts",
+  "types": "./src/index.d.ts",
   "author": "withastro",
   "license": "MIT",
   "repository": {
@@ -20,13 +20,13 @@
   "bugs": "https://github.com/withastro/astro/issues",
   "homepage": "https://docs.astro.build/en/guides/integrations-guide/lit/",
   "exports": {
-    ".": "./dist/index.js",
+    ".": "./src/index.js",
     "./server.js": {
       "default": "./server.js",
       "types": "./server.d.ts"
     },
     "./client-shim.js": "./client-shim.js",
-    "./dist/client.js": "./dist/client.js",
+    "./src/client.js": "./src/client.js",
     "./hydration-support.js": "./hydration-support.js",
     "./package.json": "./package.json"
   },
@@ -51,15 +51,12 @@
     "fix": "prettier --write ."
   },
   "dependencies": {
-    "@lit-labs/ssr": "^3.2.2",
-    "@lit-labs/ssr-client": "^1.1.7",
-    "@lit-labs/ssr-dom-shim": "^1.2.1",
+    "@lit-labs/ssr": "latest",
+    "@lit-labs/ssr-client": "latest",
+    "@lit-labs/ssr-dom-shim": "latest",
     "parse5": "^7.2.1"
   },
   "overrides": {
-    "@lit-labs/ssr": {
-      "@lit-labs/ssr-client": "1.1.7"
-    }
   },
   "devDependencies": {
     "astro": "latest",
