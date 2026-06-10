@@ -40,8 +40,7 @@
     "server-shim.js"
   ],
   "scripts": {
-    "build": "astro-scripts build \"src/**/*.ts\" && tsc",
-    "build:ci": "astro-scripts build \"src/**/*.ts\"",
+    "build": "tsc",
     "dev": "astro-scripts dev \"src/**/*.ts\"",
     "test": "astro-scripts test \"test/**/*.test.js\""
   },
@@ -57,8 +56,7 @@
     }
   },
   "devDependencies": {
-    "astro": "workspace:*",
-    "astro-scripts": "workspace:*",
+    "astro": "latest",
     "cheerio": "1.0.0",
     "lit": "^3.2.1",
     "sass": "^1.80.4"
