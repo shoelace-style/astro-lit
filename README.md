@@ -4,37 +4,33 @@ This **[Astro integration][astro-integration]** enables server-side rendering an
 
 ## Documentation
 
-Read the [`@astrojs/lit` docs][docs]
+```astro
+---
+// server imports
+import "@awesome.me/webawesome/dist/components/page/page.js"
+import "@awesome.me/webawesome/dist/components/button/button.js"
+---
 
-## Support
 
-- Get help in the [Astro Discord][discord]. Post questions in our `#support` forum, or visit our dedicated `#dev` channel to discuss current development and more!
+<body>
+  <wa-page>
+    <wa-button>Click me!</wa-button>
+  </wa-page>
+  <script>
+    // These 2 imports must come first before importing any components.
+    import "@awesome.me/astro-lit/client-shim.js"
+    import "@lit-labs/ssr-client/lit-element-hydrate-support.js"
 
-- Check our [Astro Integration Documentation][astro-integration] for more on integrations.
-
-- Submit bug reports and feature requests as [GitHub issues][issues].
-
-## Contributing
-
-This package is maintained by Astro's Core team. You're welcome to submit an issue or PR! These links will help you get started:
-
-- [Contributor Manual][contributing]
-- [Code of Conduct][coc]
-- [Community Guide][community]
+    // client imports
+    import "@awesome.me/webawesome/dist/components/page/page.js"
+    import "@awesome.me/webawesome/dist/components/button/button.js"
+  </script>
+</body>
+```
 
 ## License
 
 MIT
 
-Copyright (c) 2023–present [Astro][astro]
-
-[astro]: https://astro.build/
-[docs]: https://docs.astro.build/en/guides/integrations-guide/lit/
-[contributing]: https://github.com/withastro/astro/blob/main/CONTRIBUTING.md
-[coc]: https://github.com/withastro/.github/blob/main/CODE_OF_CONDUCT.md
-[community]: https://github.com/withastro/.github/blob/main/COMMUNITY_GUIDE.md
-[discord]: https://astro.build/chat/
-[issues]: https://github.com/withastro/astro/issues
-[astro-integration]: https://docs.astro.build/en/guides/integrations-guide/
-
-<https://github.com/withastro/docs/blob/v4/src/content/docs/en/guides/integrations-guide/lit.mdx>
+Copyright (c) 2023–2026    - Astro
+Copyright (c) 2026-present - Font Awesome
