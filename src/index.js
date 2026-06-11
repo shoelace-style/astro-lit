@@ -1,20 +1,26 @@
 // @ts-check
 import { readFileSync } from 'node:fs';
+import * as url from 'node:url';
+import * as path from 'node:path'
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+
+const data = JSON.parse(readFileSync(path.join(__dirname, "../package.json"), { encoding: "utf8" }))
+const packageName = data.name
 
 function getViteConfiguration() {
 	return {
 		optimizeDeps: {
 			include: [
-				'astro-lit/src/client.js',
-				'astro-lit/client-shim.js',
-				'astro-lit/hydration-support.js',
+				`${packageName}/src/client.js`,
+				`${packageName}/client-shim.js`,
+				`${packageName}/hydration-support.js`,
 				'@webcomponents/template-shadowroot/template-shadowroot.js',
 				'@lit-labs/ssr-client/lit-element-hydrate-support.js',
 			],
-			exclude: ['astro-lit/server.js'],
+			exclude: [`${packageName}/server.js`],
 		},
 		ssr: {
-			external: ['lit-element', '@lit-labs/ssr', '@astrojs/lit', 'lit/decorators.js'],
+			external: ['lit-element', '@lit-labs/ssr', `${packageName}`, 'lit/decorators.js'],
 		},
 	};
 }
@@ -24,8 +30,8 @@ function getViteConfiguration() {
  */
 export function getContainerRenderer() {
 	return {
-		name: 'astro-lit',
-		serverEntrypoint: 'astro-lit',
+		name: packageName,
+		serverEntrypoint: packageName,
 	};
 }
 
@@ -35,21 +41,14 @@ export function getContainerRenderer() {
  */
 export default function () {
 	return {
-		name: 'astro-lit',
+		name: packageName,
 		hooks: {
 			'astro:config:setup': ({ updateConfig, addRenderer, injectScript }) => {
-				// Inject the necessary polyfills on every page (inlined for speed).
-				injectScript(
-					'head-inline',
-					readFileSync(new URL('../client-shim.min.js', import.meta.url), { encoding: 'utf-8' }),
-				);
-				// Inject the hydration code, before a component is hydrated.
-				injectScript('before-hydration', `import '@astrojs/lit/hydration-support.js';`);
 				// Add the lit renderer so that Astro can understand lit components.
 				addRenderer({
-					name: 'astro-lit',
-					serverEntrypoint: 'astro-lit/server.js',
-					clientEntrypoint: 'astro-lit/src/client.js',
+					name: packageName,
+					serverEntrypoint: `${packageName}/server.js`,
+					clientEntrypoint: `${packageName}/src/client.js`,
 				});
 				// Update the vite configuration.
 				updateConfig({

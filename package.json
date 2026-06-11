@@ -1,15 +1,14 @@
 {
-  "name": "astro-lit",
-  "version": "4.3.0",
+  "name": "@awesome.me/astro-lit",
+  "version": "5",
   "description": "Use Lit components within Astro",
   "type": "module",
   "types": "./src/index.d.ts",
-  "author": "withastro",
+  "author": "Web Awesome",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/withastro/astro.git",
-    "directory": "packages/integrations/lit"
+    "url": "https://github.com/shoelace.style/astro-lit.git"
   },
   "keywords": [
     "astro-integration",
@@ -17,8 +16,8 @@
     "renderer",
     "lit"
   ],
-  "bugs": "https://github.com/withastro/astro/issues",
-  "homepage": "https://docs.astro.build/en/guides/integrations-guide/lit/",
+  "bugs": "https://github.com/shoelace-style/astro-lit/issues",
+  "homepage": "https://github.com/shoelace-style/astro-lit",
   "exports": {
     ".": "./src/index.js",
     "./server.js": {
@@ -31,7 +30,6 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "dist",
     "client-shim.js",
     "client-shim.min.js",
     "hydration-support.js",
@@ -51,13 +49,12 @@
     "fix": "prettier --write ."
   },
   "dependencies": {
-    "@lit-labs/ssr": "latest",
-    "@lit-labs/ssr-client": "latest",
-    "@lit-labs/ssr-dom-shim": "latest",
+    "@lit-labs/ssr": "^4.1.0",
+    "@lit-labs/ssr-client": "^1.1.8",
+    "@lit-labs/ssr-dom-shim": "^1.6.0",
     "parse5": "^7.2.1"
   },
-  "overrides": {
-  },
+  "overrides": {},
   "devDependencies": {
     "astro": "latest",
     "cheerio": "1.0.0",
