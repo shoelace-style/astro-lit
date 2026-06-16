@@ -1,6 +1,8 @@
 {
   "include": ["./src"],
   "compilerOptions": {
+    "declaration": true,
+    "skipLibCheck": true,
     "emitDeclarationOnly": true,
     "allowJs": true
   }

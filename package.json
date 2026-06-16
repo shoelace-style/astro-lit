@@ -38,8 +38,8 @@
     "server-shim.js"
   ],
   "scripts": {
-    "build": "npm run clean && tsc && npm run build:cem &&  npm run build:cdn",
-    "clean": "rimraf -g \"./{src}/**/*.d.ts\"",
+    "build": "npm run clean && tsc",
+    "clean": "rimraf -g \"./src/**/*.d.ts\"",
     "prepublish": "npm run build",
     "deploy:patch": "npm version patch && npm publish && git push --follow-tags",
     "deploy:minor": "npm version minor && npm publish && git push --follow-tags",
@@ -56,6 +56,7 @@
   },
   "overrides": {},
   "devDependencies": {
+    "@types/node": "^24.13.2",
     "astro": "latest",
     "cheerio": "1.0.0",
     "lit": "^3.2.1",
