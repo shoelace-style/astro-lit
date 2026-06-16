@@ -31,7 +31,6 @@
   },
   "files": [
     "client-shim.js",
-    "client-shim.min.js",
     "hydration-support.js",
     "server.js",
     "server.d.ts",
