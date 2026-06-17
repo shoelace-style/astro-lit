@@ -34,7 +34,9 @@
     "hydration-support.js",
     "server.js",
     "server.d.ts",
-    "server-shim.js"
+    "server-shim.js",
+    "src",
+    "README.md"
   ],
   "scripts": {
     "build": "npm run clean && tsc",
