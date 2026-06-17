@@ -12,7 +12,7 @@ function getViteConfiguration() {
 		optimizeDeps: {
 			include: [
 				`${packageName}/src/client.js`,
-				`${packageName}/client-shim.js`,
+				`${packageName}/dsd-polyfill.js`,
 				`${packageName}/hydration-support.js`,
 				'@webcomponents/template-shadowroot/template-shadowroot.js',
 				'@lit-labs/ssr-client/lit-element-hydrate-support.js',
@@ -43,10 +43,8 @@ export default function () {
 	return {
 		name: packageName,
 		hooks: {
-			'astro:config:setup': ({ updateConfig, addRenderer, injectScript }) => {
-				// for browsers that do not support DSD
-				injectScript('page', `${packageName}/client-shim.js`)
-				injectScript('page', `${packageName}/hydration-support.js`),
+			'astro:config:setup': ({ updateConfig, addRenderer }) => {
+				// Previously, this used `injectScript()`, however, it seems error prone and instead just have people make sure they do their imports properly.
 				// Add the lit renderer so that Astro can understand lit components.
 				addRenderer({
 					name: packageName,

@@ -44,8 +44,12 @@ class ServerRenderer {
 				propByAttr = new Map()
 				for (const [propName, options] of Ctr.elementProperties) {
 					if (options.attribute === false) continue; // property has no attribute
-					const attrName =
-						typeof options.attribute === 'string' ? options.attribute : propName;
+					let attrName = propName
+
+					if (typeof options.attribute === 'string') {
+						attrName = options.attribute
+					}
+
 					propByAttr.set(attrName, propName);
 				}
 			}

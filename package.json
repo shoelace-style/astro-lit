@@ -24,13 +24,13 @@
       "default": "./server.js",
       "types": "./server.d.ts"
     },
-    "./client-shim.js": "./client-shim.js",
+    "./dsd-polyfill.js": "./dsd-polyfill.js",
     "./src/client.js": "./src/client.js",
     "./hydration-support.js": "./hydration-support.js",
     "./package.json": "./package.json"
   },
   "files": [
-    "client-shim.js",
+    "dsd-polyfill.js",
     "hydration-support.js",
     "server.js",
     "server.d.ts",
@@ -56,7 +56,7 @@
   "overrides": {},
   "devDependencies": {
     "@types/node": "^24.13.2",
-    "astro": "latest",
+    "astro": "^6.4.8",
     "cheerio": "1.0.0",
     "lit": "^3.2.1",
     "prettier": "^3.8.4",
