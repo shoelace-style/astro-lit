@@ -44,6 +44,9 @@ export default defineConfig({
 
 Example using Web Awesome:
 
+```bash
+npm install @awesome.me/webawesome
+```
 
 ```astro
 ---
