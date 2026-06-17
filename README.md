@@ -1,8 +1,10 @@
-# @astrojs/lit 🔥
+# astro-lit 🚀🔥
 
-This **[Astro integration][astro-integration]** enables server-side rendering and client-side hydration for your [Lit](https://lit.dev/) custom elements.
+This Astro integration enables server-side rendering and client-side hydration for your [Lit](https://lit.dev/) custom elements.
 
 ## Documentation
+
+Example using Web Awesome
 
 ```astro
 ---

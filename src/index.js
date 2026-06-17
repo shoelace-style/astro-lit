@@ -44,6 +44,9 @@ export default function () {
 		name: packageName,
 		hooks: {
 			'astro:config:setup': ({ updateConfig, addRenderer, injectScript }) => {
+				// for browsers that do not support DSD
+				injectScript('page', `${packageName}/client-shim.js`)
+				injectScript('page', `${packageName}/hydration-support.js`),
 				// Add the lit renderer so that Astro can understand lit components.
 				addRenderer({
 					name: packageName,
