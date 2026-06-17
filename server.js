@@ -2,6 +2,7 @@
 import './server-shim.js';
 
 import { LitElementRenderer } from '@lit-labs/ssr/lib/lit-element-renderer.js';
+import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
 import * as parse5 from 'parse5';
 
 import * as url from 'node:url';
@@ -15,7 +16,7 @@ class ServerRenderer {
 	// Keep a static cache of elements so we don't have to iterate for attributes all the time.
 	static constructorCache = new WeakMap();
 
-	*render(Component, attrs, slots) {
+	async *render(Component, attrs, slots) {
 		let tagName = Component;
 		if (typeof tagName !== 'string') {
 			tagName = Component[Symbol.for('tagName')];
@@ -32,7 +33,12 @@ class ServerRenderer {
 			// authored attributes whose name differs from the property (e.g. a
 			// property declared with `attribute: 'my-attr'`).
 
-			let propByAttr = /** @type {typeof ServerRenderer} */ (this.constructor).constructorCache.get(Ctr)
+
+			let propByAttr = null
+
+			if (Ctr) {
+				propByAttr = /** @type {typeof ServerRenderer} */ (this.constructor).constructorCache.get(Ctr)
+			}
 
 			if (!propByAttr) {
 				propByAttr = new Map()
@@ -72,7 +78,7 @@ class ServerRenderer {
 		instance.connectedCallback();
 
 		yield `<${tagName}${shouldDeferHydration ? ' defer-hydration' : ''}`;
-		yield* instance.renderAttributes();
+		yield await collectResult(instance.renderAttributes());
 		yield `>`;
 		const shadowContents = instance.renderShadow({
 			elementRenderers: [LitElementRenderer],
@@ -88,7 +94,7 @@ class ServerRenderer {
 			// match web platform behavior.
 			const delegatesfocusAttr = delegatesFocus ? ' shadowrootdelegatesfocus' : '';
 			yield `<template shadowroot="${mode}" shadowrootmode="${mode}"${delegatesfocusAttr}>`;
-			yield* shadowContents;
+			yield await collectResult(shadowContents);
 			yield '</template>';
 		}
 		if (slots) {
@@ -144,7 +150,7 @@ async function renderToStaticMarkup(Component, props, slots) {
 	let tagName = Component;
 
 	let out = [];
-	for (let chunk of serverRenderer.render(tagName, props, slots)) {
+	for await (let chunk of serverRenderer.render(tagName, props, slots)) {
 		out.push(chunk);
 	}
 
