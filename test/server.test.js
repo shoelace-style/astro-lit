@@ -4,9 +4,10 @@ import * as cheerio from 'cheerio';
 import { LitElement, html } from 'lit';
 // Must come after lit import because @lit/reactive-element defines
 // globalThis.customElements which the server shim expects to be defined.
-import server from '../server.js';
 
-const { check, renderToStaticMarkup } = server;
+import * as server from '../server.js';
+const { check, renderToStaticMarkup } = server.default
+
 
 describe('check', () => {
 	it('should be false with no component', async () => {
@@ -89,6 +90,27 @@ describe('renderToStaticMarkup', () => {
 		const $ = cheerio.load(render.html);
 		assert.equal($(tagName).attr('attr1'), attr1);
 		assert.equal($(`${tagName} template`).text().includes(`Hello ${prop1}`), true);
+	});
+
+	it('should properly handle divergent attributes / properties', async () => {
+		const tagName = 'divergent-props-and-attrs';
+		const value = "foo"
+		customElements.define(
+			tagName,
+			class extends LitElement {
+				static properties = {
+					defaultValue: { attribute: "value", type: String },
+					value: { attribute: false }
+				};
+
+				render() {
+					return html`<p>Default Value is: ${value}</p>`;
+				}
+			},
+		);
+		const render = await renderToStaticMarkup(tagName, { value });
+		const $ = cheerio.load(render.html);
+		assert.equal($(tagName).attr('value'), value);
 	});
 
 	it('should render nested components', async () => {
