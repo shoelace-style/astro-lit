@@ -77,5 +77,5 @@ import "@awesome.me/webawesome/dist/components/button/button.js"
 
 MIT
 
-Copyright (c) 2023–2026    - Astro
-Copyright (c) 2026-present - Font Awesome
+- Copyright (c) 2023–2026    - Astro
+- Copyright (c) 2026-present - Font Awesome
