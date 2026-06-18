@@ -1,6 +1,6 @@
 {
   "name": "@awesome.me/astro-lit",
-  "version": "5.0.4",
+  "version": "5.0.5",
   "description": "Use Lit components within Astro",
   "type": "module",
   "types": "./src/index.d.ts",
